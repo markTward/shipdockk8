@@ -1,2 +1,3 @@
-# language setting
 language: python
+install: true
+script: true
