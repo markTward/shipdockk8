@@ -1,2 +1,3 @@
 # shipdockk8
-shippable to kubernetes CI/CD pipeline
+shippable to kubernetes CI/CD pipeline POC
+
