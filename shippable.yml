@@ -1,3 +1,11 @@
 language: python
-install: true
-script: true
+
+sevices:
+  - neo4j
+
+notifications:
+  email:
+    recipients:
+      - mark.ward@lithium.com
+    on_success: change
+    on_failure: always
