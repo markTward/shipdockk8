@@ -9,8 +9,9 @@ install:
 
 before_script:
   - BASE_DIR=`pwd`
-  - mkdir -p $BASE_DIR/shippable/buildoutput
-  - echo $BASE_DIR/shippable/buildoutput
+  - SHIPPABLE_OUTPUT=$BASE_DIR/shippable/buildoutput
+  - echo $SHIPPABLE_OUTPUT
+  - mkdir -p $SHIPPABLE_OUTPUT
 
 script:
   - mkdir -p /tmp/docsrv
@@ -26,7 +27,7 @@ script:
   - gulp kss-build
 
 after_script:
-  - cp -r /tmp/docsrv/angular-li/styleguide/* $BASE_DIR/shippable/buildoutput
+  - cp -r /tmp/docsrv/angular-li/styleguide/* $SHIPPABLE_OUTPUT
 
 notifications:
   email:
