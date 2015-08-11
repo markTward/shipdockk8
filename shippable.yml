@@ -13,7 +13,9 @@ before_script:
   - echo $SHIPPABLE_OUTPUT
   - mkdir -p $SHIPPABLE_OUTPUT
 
-script:
+script: true
+
+after_script:
   - mkdir -p /tmp/docsrv
   - cd /tmp/docsrv
   - git clone https://$AUTHTOKEN@github.com/lithiumtech/angular-li.git
@@ -25,8 +27,6 @@ script:
   - npm install
   - cd ../..
   - gulp kss-build
-
-after_script:
   - cp -r /tmp/docsrv/angular-li/styleguide/* $SHIPPABLE_OUTPUT
 
 notifications:
