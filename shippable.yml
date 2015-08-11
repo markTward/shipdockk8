@@ -1,11 +1,14 @@
 language: node_js
 
+env:
+  secure: eNRk4pahwXiyOPOq3xjsQLSsJIU55FZlokbqHq5m+KyDJHefSiNA4M66efFNdm+87PEgukG0Ayypm1pYFN/eMBJ/tml+qP0bhxl/wtBJpwBIk4lvAyQvDNVTiYijXlipgllfwHZktOAQyhiBa9D66turCPegzhRejAJLA7ucFD2xVkraFlVkNt6nS7ZHuAzjK9UdfILzL2ORwFeSHEnQ5OM2dplfgTmzMt0jHqJCUIEGZ6WJgXPi3KUIYoydQJp+/vdSk3WMu16AIHe5aKTE16B9OkS+TerS6HLlCdZKzDOujkJuPnKhWm4iZSaIUrOB5yMI/Pitu/WULGorTFP+SA==
+
 install:
   - apt-get -y install git
   - npm install -g gulp
   - mkdir -p /tmp/testclone
   - cd /tmp/testclone
-  - git clone git@github.com:lithiumtech/lithium-sdk-kss-doctools.git
+  - git clone https://$AUTHTOKEN@github.com/lithiumtech/lithium-sdk-kss-doctools.git
 
 script: true
 
