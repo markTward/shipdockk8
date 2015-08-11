@@ -24,7 +24,7 @@ script:
   - gulp kss-build
 
 after_script:
-  - cp -r styleguide/* ./shippable/buildoutput
+  - cp -r /tmp/docsrv/angular-li/styleguide/* ./shippable/buildoutput
 
 notifications:
   email:
