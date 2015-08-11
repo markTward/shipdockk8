@@ -1,2 +1,2 @@
 FROM httpd
-COPY ./data/ /usr/local/apache2/htdocs
+ADD ./buildoutput/ /usr/local/apache2/htdocs

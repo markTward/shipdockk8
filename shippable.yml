@@ -3,18 +3,14 @@ language: node_js
 env:
   - secure: tSt++3qUaOasxsOFMc7zUp9ROCzWwojFkmlq4psNP+891J4oTA8jo98CEjMCWRjaYdRB8Q5l/zXCQE9Xlcvgv8IXh3gxm5ZTx393TOQopH5zs/nKEfuIxrzaLj4HogBKfSiehfotaR+szYf2w7iMsNR5Arkokt11k2MGK/om/iWxs5HyzqLvXivXDnZQPyIdWtRUpN1RdRjk7GCINrAQa8Qsdm9F3yWHDqfZTHHhzxTU+9WG8uW8ts33wu26WwPiAYJoaj/hK5xyhMAdKMOuG01o9tXBh1ucT7A4ksP0Fq+rxktNqwRjRXwV0NE86+Dlwg9C/ZjCkSxUW7XA+jpRUw==
 
-before_install:
-  - BUILD_HOME=`pwd`
-  - DATA_HOME=$BUILD_HOME/data
-  - mkdir -p $DATA_HOME
-
 install:
   - apt-get -y install git
   - npm install -g gulp
 
-script: true
+before_script:
+  - mkdir -p shippable/buildoutput
 
-after_success:
+script:
   - mkdir -p /tmp/docsrv
   - cd /tmp/docsrv
   - git clone https://$AUTHTOKEN@github.com/lithiumtech/angular-li.git
@@ -26,7 +22,9 @@ after_success:
   - npm install
   - cd ../..
   - gulp kss-build
-  - cp -r styleguide/* $DATA_HOME
+
+after_script:
+  - cp -r styleguide/* ./shippable/buildoutput
 
 notifications:
   email:
