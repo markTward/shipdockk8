@@ -1,16 +1,32 @@
 language: node_js
 
 env:
-  secure: eNRk4pahwXiyOPOq3xjsQLSsJIU55FZlokbqHq5m+KyDJHefSiNA4M66efFNdm+87PEgukG0Ayypm1pYFN/eMBJ/tml+qP0bhxl/wtBJpwBIk4lvAyQvDNVTiYijXlipgllfwHZktOAQyhiBa9D66turCPegzhRejAJLA7ucFD2xVkraFlVkNt6nS7ZHuAzjK9UdfILzL2ORwFeSHEnQ5OM2dplfgTmzMt0jHqJCUIEGZ6WJgXPi3KUIYoydQJp+/vdSk3WMu16AIHe5aKTE16B9OkS+TerS6HLlCdZKzDOujkJuPnKhWm4iZSaIUrOB5yMI/Pitu/WULGorTFP+SA==
+  - secure: tSt++3qUaOasxsOFMc7zUp9ROCzWwojFkmlq4psNP+891J4oTA8jo98CEjMCWRjaYdRB8Q5l/zXCQE9Xlcvgv8IXh3gxm5ZTx393TOQopH5zs/nKEfuIxrzaLj4HogBKfSiehfotaR+szYf2w7iMsNR5Arkokt11k2MGK/om/iWxs5HyzqLvXivXDnZQPyIdWtRUpN1RdRjk7GCINrAQa8Qsdm9F3yWHDqfZTHHhzxTU+9WG8uW8ts33wu26WwPiAYJoaj/hK5xyhMAdKMOuG01o9tXBh1ucT7A4ksP0Fq+rxktNqwRjRXwV0NE86+Dlwg9C/ZjCkSxUW7XA+jpRUw==
+
+before_install:
+  - BUILD_HOME=`pwd`
+  - DATA_HOME=$BUILD_HOME/data
+  - mkdir -p $DATA_HOME
 
 install:
   - apt-get -y install git
   - npm install -g gulp
-  - mkdir -p /tmp/testclone
-  - cd /tmp/testclone
-  - git clone https://$AUTHTOKEN@github.com/lithiumtech/lithium-sdk-kss-doctools.git
 
 script: true
+
+after_success:
+  - mkdir -p /tmp/docsrv
+  - cd /tmp/docsrv
+  - git clone https://$AUTHTOKEN@github.com/lithiumtech/angular-li.git
+  - cd angular-li
+  - npm install
+  - cd node_modules
+  - git clone https://$AUTHTOKEN@github.com/lithiumtech/lithium-sdk-kss-doctools.git
+  - cd lithium-sdk-kss-doctools
+  - npm install
+  - cd ../..
+  - gulp kss-build
+  - cp -r styleguide/* $DATA_HOME
 
 notifications:
   email:
