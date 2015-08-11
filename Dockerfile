@@ -1,2 +1,2 @@
 FROM httpd
-VOLUME /data
+COPY ./data/ /usr/local/apache2/htdocs
